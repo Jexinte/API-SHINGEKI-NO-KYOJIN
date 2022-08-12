@@ -1,0 +1,35 @@
+{
+  "name": "api-shingeki-no-kyojin",
+  "version": "1.0.0",
+  "description": "C'est une API qui permet d'effectuer des opérations CRUD sur des personnages de l'univers du manga \"Shingeki No Kyojin\"",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jexinte/API-SHINGEKI-NO-KYOJIN.git"
+  },
+  "keywords": [
+    "api",
+    "personnages",
+    "crud",
+    "formulaire"
+  ],
+  "author": "Yokke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jexinte/API-SHINGEKI-NO-KYOJIN/issues"
+  },
+  "homepage": "https://github.com/Jexinte/API-SHINGEKI-NO-KYOJIN#readme",
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mariadb": "^3.0.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.19",
+    "sequelize": "^6.21.3"
+  }
+}

@@ -1,0 +1,49 @@
+/* Mouse Memoirs Regular 400 */
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: 'Mouse Memoirs';
+}
+
+body{
+  height: 100%;
+}
+
+/* HEADER */
+
+header{
+  position: fixed;
+  width: 10em;
+  height: 100vh;
+  text-align: center;
+  box-shadow: 10px 5px 10px rgba(0,0,0,0.1);
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  gap:6em;
+  position: relative;
+  top:15em;
+}
+nav a {
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 1.5em;
+}
+
+nav a:visited {
+  color:black;
+}
+
+nav a.router-link-exact-active {
+  color: black;
+}
+
+#logo{
+  border-radius: 50%;
+}
