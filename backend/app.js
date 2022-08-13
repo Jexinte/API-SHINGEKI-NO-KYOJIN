@@ -5,6 +5,7 @@ const sequelize = require('./db/sequelize')
 const app = express()
 
 app.use(morgan('dev'))
-app.use('api/personnages',personnagesRoutes)
+app.use('/api/personnages',personnagesRoutes)
+app.use('/images',express.static('images'))
 sequelize.initialisationConnexionBdd()
 app.listen(3000,console.log(`Le serveur a bien démarrer sur le port 3000 !`))

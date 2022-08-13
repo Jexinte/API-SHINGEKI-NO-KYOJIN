@@ -39,5 +39,5 @@ const initialisationConnexionBdd = () => {
 }
 
 module.exports = {
-  initialisationConnexionBdd
+  initialisationConnexionBdd,Personnages
 }

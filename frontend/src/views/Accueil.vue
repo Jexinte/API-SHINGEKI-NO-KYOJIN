@@ -1,41 +1,48 @@
 <template>
 <!-- PERSONNAGES  -->
 <section class="personnages">
-    <div class="box">
-      <img src="https://www.coyotemag.fr/wp-content/uploads/2021/11/LAttaque-des-Titans.jpg" alt="">
-      <h1>Eren</h1>
-    </div>
+
   </section>
 </template>
 
 <script>
-// export default {
+ export default {
 
-//   mounted:function() {
-//   this.afficheLesCartesAvecTransition()
-//   },
-//   methods : {
-//     afficheLesCartesAvecTransition() {
-//       const box = document.querySelectorAll('.personnages .box');
+   mounted:function() {
+   this.afficheLesCartesDesPersonnages()
+   },
+   methods : {
+     afficheLesCartesDesPersonnages() {
+       const sectionPersonnages = document.querySelector('.personnages')
+       
+       fetch(`http://localhost:3000/api/personnages`)
+       .then(response => {
+        return response.json()
+       })
 
-//       box.forEach(element => {
-
-//         const test = () => {
-//           element.style.transition = "display 700ms ease-out"
-//           element.style.display = "block"
-
-//         }
-  
-//         test()
-//       })
-
-//     }
-//   }
-// }
+       .then(personnages => {
+        
+        personnages.map(personnage => {
+        
+         const box = document.createElement('a')
+               box.className = "box"
+               box.href=`/personnage?id=${personnage.id}`
+        sectionPersonnages.append(box)
+         const img = document.createElement('img')
+         box.appendChild(img)
+         img.src = personnage.imageCarte
+        const h1 = document.createElement('h1')
+              h1.className = "h1"
+        box.appendChild(h1)
+        h1.textContent = personnage.nom
+       })
+       })
+     }
+   }
+ }
 </script>
 
-<style scoped>
-
+<style>
 
 .box {
   width: 200px;
@@ -44,7 +51,7 @@
 }
 .box img{
   width: 100%;
-
+  height: 85%;
 }
 
 .box:hover{
@@ -64,9 +71,9 @@ padding-top: 4em;
 
 }
 
-h1{
+
+.h1{
   padding:.3em;
 }
 
 </style>
-
