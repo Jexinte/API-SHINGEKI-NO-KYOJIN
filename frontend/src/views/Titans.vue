@@ -24,9 +24,10 @@
         
         
         personnages.map(personnage => {
-        if(searchParams.get('titans') === personnage.surnom) {
+        if(searchParams.get('titans') === personnage.origine) {
           const box = document.createElement('a')
                box.className = "box"
+               box.href=`/personnage?id=${personnage.id}`
         sectionPersonnages.append(box)
          const img = document.createElement('img')
          box.appendChild(img)
@@ -35,6 +36,7 @@
               h1.className = "h1"
         box.appendChild(h1)
         h1.textContent = personnage.nom
+        h1.style.color = "#0000FF"
         }
        })
        })

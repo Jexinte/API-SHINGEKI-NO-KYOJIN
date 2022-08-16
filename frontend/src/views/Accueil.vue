@@ -6,37 +6,42 @@
 </template>
 
 <script>
+
  export default {
 
+ 
    mounted:function() {
-   this.afficheLesCartesDesPersonnages()
+     this.afficheLesCartesDesPersonnages()
    },
+
+ 
    methods : {
+    
+ 
      afficheLesCartesDesPersonnages() {
        const sectionPersonnages = document.querySelector('.personnages')
-       
-       fetch(`http://localhost:3000/api/personnages`)
-       .then(response => {
-        return response.json()
-       })
+       const axios = require('axios')       
+        axios.get(`http://localhost:3000/api/personnages`)
 
-       .then(personnages => {
+        .then(personnages => {
         
-        personnages.map(personnage => {
+         personnages.data.map(personnage => {
         
-         const box = document.createElement('a')
-               box.className = "box"
-               box.href=`/personnage?id=${personnage.id}`
-        sectionPersonnages.append(box)
-         const img = document.createElement('img')
-         box.appendChild(img)
+          const box = document.createElement('a')
+                box.className = "box"
+                box.href=`/personnage?id=${personnage.id}`
+         sectionPersonnages.append(box)
+          const img = document.createElement('img')
+          box.appendChild(img)
          img.src = personnage.imageCarte
-        const h1 = document.createElement('h1')
+         const h1 = document.createElement('h1')
               h1.className = "h1"
-        box.appendChild(h1)
-        h1.textContent = personnage.nom
-       })
-       })
+         box.appendChild(h1)
+         h1.textContent = personnage.nom
+
+         
+        })
+        })
      }
    }
  }

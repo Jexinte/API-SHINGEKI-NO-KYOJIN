@@ -23,15 +23,7 @@ module.exports = (sequelize,DataTypes) => {
       allowNull : false
     },
 
-    surnom : {
-      type:DataTypes.STRING,
-      validate : {
-        notEmpty : {
-          args : true,
-          msg: `Ce champ ne peut être vide`
-        }
-      },
-    },
+
 
     histoire : {
       type:DataTypes.TEXT,

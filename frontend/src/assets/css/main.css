@@ -45,6 +45,58 @@ nav a {
   text-decoration: none;
   margin-right: 20px;
   font-size: 1.5em;
+  position: relative;
+}
+
+
+#eldiens::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left:45px;
+  width: 0px;
+  border-bottom: 1px solid #666666;
+  border-width: 4px;
+  top:27px;
+  transition : width 700ms ease-in-out;
+}
+
+#eldiens:hover::after{
+  width: 50px;
+}
+
+
+#mahr::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left:45px;
+  width: 0px;
+  border-bottom: 1px solid #008000;
+  border-width: 4px;
+  top:27px;
+  transition : width 700ms ease-in-out;
+}
+
+#mahr:hover::after{
+  width: 50px;
+}
+
+
+#titans::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left:45px;
+  width: 0px;
+  border-bottom: 1px solid #0000FF;
+  border-width: 4px;
+  top:27px;
+  transition : width 700ms ease-in-out;
+}
+
+#titans:hover::after{
+  width: 50px;
 }
 
 nav a:visited {
