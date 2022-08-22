@@ -31,5 +31,8 @@
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.19",
     "sequelize": "^6.21.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1"
   }
 }

@@ -1,10 +1,12 @@
 <template>
+<Menu></Menu>
 <section class="personnages">
 
   </section>
 </template>
 
 <script>
+import Menu from '@/components/Menu.vue'
  export default {
 
    mounted:function() {
@@ -41,6 +43,7 @@
        })
        })
      }
-   }
+   },
+   components : {Menu}
  }
 </script>

@@ -1,4 +1,5 @@
 <template>
+<Menu></Menu>
 <!-- PERSONNAGES  -->
 <section class="personnages">
 
@@ -7,8 +8,8 @@
 
 <script>
 
+import Menu from '@/components/Menu.vue'
  export default {
-
  
    mounted:function() {
      this.afficheLesCartesDesPersonnages()
@@ -43,7 +44,8 @@
         })
         })
      }
-   }
+   },
+   components:{  Menu }
  }
 </script>
 
@@ -80,5 +82,7 @@ padding-top: 4em;
 .h1{
   padding:.3em;
 }
+
+
 
 </style>

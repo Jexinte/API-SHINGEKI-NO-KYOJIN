@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize')
 const PersonnagesModel = require('../models/Personnage')
+const UserModel = require('../models/User')
 const PersonnagesDonnées = require('./personnages')
 require('dotenv').config()
 const sequelize = new Sequelize(
@@ -16,6 +17,7 @@ const sequelize = new Sequelize(
 )
 
 const Personnages = PersonnagesModel(sequelize,DataTypes)
+const User = UserModel(sequelize,DataTypes)
 const initialisationConnexionBdd = () => {
   sequelize.authenticate()
   .then(_ => console.log('La connexion a la base de donneés a bien été effectuée'))
@@ -33,11 +35,12 @@ const initialisationConnexionBdd = () => {
         origine:personnage.origine,
         imageCarte:personnage.imageCarte,
         imageHistoire : personnage.imageHistoire
-      })
+      },
+      )
     })
   })
 }
 
 module.exports = {
-  initialisationConnexionBdd,Personnages
+  initialisationConnexionBdd,Personnages,User
 }
