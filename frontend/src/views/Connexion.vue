@@ -30,12 +30,13 @@ export default{
     }
   },
   mounted:function(){
-    this.creationUtilisateur()
+    this.login()
   },
 
   methods : {
-    creationUtilisateur(){
+    login(){
       const form = document.querySelector('form')
+      const myHeaders = new Headers()
   form.addEventListener('submit',(e) => {
     
     if(this.utilisateur === '' || this.motdepasse === "") {
@@ -43,19 +44,26 @@ export default{
     e.preventDefault()
       alert(`Merci de saisir un nom utilisateur ainsi qu'un mot de passe !`)
    }
+
+
+
   else{
 
     axios({
       method:'post',
-      url:'http://localhost:3000/api/personnages/login',
-      data : new FormData(form)
+      url:'http://localhost:3000/api/auth/login',
+      data : new FormData(form),
+      
     })
 
-    .then(res=>{
-      if(res.status === 200) {
-        window.location.href="/listePersonnages"
-      }
-    })
+       .then(res=>{
+        if(res.status === 201)
+        return window.location.href="/listePersonnages"        
+       })
+
+       .catch(error => {
+        console.log(error.response['data'].message)
+       })
   }
   })
     }

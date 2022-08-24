@@ -21,7 +21,9 @@ import Menu from '@/components/Menu.vue'
  
      afficheLesCartesDesPersonnages() {
        const sectionPersonnages = document.querySelector('.personnages')
-       const axios = require('axios')       
+       const axios = require('axios') 
+       const headers = new Headers()
+      
         axios.get(`http://localhost:3000/api/personnages`)
 
         .then(personnages => {
@@ -42,6 +44,12 @@ import Menu from '@/components/Menu.vue'
 
          
         })
+
+        })
+
+        .catch(error => {
+          
+          console.log(error + ""+headers)
         })
      }
    },

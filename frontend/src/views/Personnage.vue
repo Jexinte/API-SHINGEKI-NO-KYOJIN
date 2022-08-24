@@ -1,6 +1,5 @@
 <template>
-
-
+<Menu></Menu>
 <div class="container">
   <div class="left">
     <img src="" alt="">
@@ -13,7 +12,7 @@
 </div>
 </template>
 <script>
-
+import Menu from '@/components/Menu.vue'
 
 export default {
 
@@ -47,7 +46,8 @@ export default {
          })
        })
      }
-   }
+   },
+   components:{Menu}
  }
 </script>
 <style scoped>
