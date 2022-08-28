@@ -11,6 +11,13 @@ exports.AfficheLesPersonnages = (req,res) => {
   .catch(error => res.status(404).json({message:error}))
 }
 
+exports.AfficheLesPersonnagesParId = (req,res) => {
+  const {id} = req.params
+  Personnages.findByPk(id).then(personnage => res.status(200).json({message:personnage}))
+}
+
+
+
 exports.creationPersonnage = (req,res) => {
   Personnages.create({
     nom : req.body.nom,

@@ -6,7 +6,7 @@ module.exports = (req,res,next) => {
   try {
     
     const token = req.headers.authorization.split(' ')[1] //* Récupération du token cryptée
-        const decodedToken = jwt.verify(tokenCrypté,`${process.env.TOKEN_KEY}`) //* Le token est décodé afin de récupérer l'identifiant ci-dessous
+        const decodedToken = jwt.verify(token,`${process.env.TOKEN_KEY}`) //* Le token est décodé afin de récupérer l'identifiant ci-dessous
     
     const userId = decodedToken.userId
 

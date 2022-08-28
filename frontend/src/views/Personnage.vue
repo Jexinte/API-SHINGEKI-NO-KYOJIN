@@ -21,29 +21,25 @@ export default {
    },
    methods : {
      afficheLaCarteDuPersonnage() {
-       const container = document.querySelector('.container')
        
-       fetch(`http://localhost:3000/api/personnages`)
-       .then(response => {
-        return response.json()
-       })
-
-       .then(personnage => {
-        
+       
+       const axios = require('axios') 
+       const token = localStorage.getItem('token')
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         const searchParams = new URLSearchParams(window.location.search)
         const idDansLurl = parseInt(searchParams.get('id'))
+        axios.get(`http://localhost:3000/api/personnages/${idDansLurl}`)
+
+       .then(personnage => {
+
+      
         const img = document.querySelector('.left > img')
         const h1 = document.querySelector('.right > h1')
         const paragraph = document.querySelector(' .right p')
-
-         personnage.filter(personnage => {
-           if(idDansLurl === personnage.id) 
-           {
-              img.src = personnage.imageHistoire
-              h1.textContent = personnage.nom
-              paragraph.textContent = personnage.histoire 
-           }
-         })
+        img.src = personnage.data['message'].imageHistoire
+        h1.textContent = personnage.data['message'].nom
+        paragraph.textContent = personnage.data['message'].histoire
+     
        })
      }
    },

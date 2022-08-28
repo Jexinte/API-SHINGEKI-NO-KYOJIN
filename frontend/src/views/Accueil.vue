@@ -22,12 +22,14 @@ import Menu from '@/components/Menu.vue'
      afficheLesCartesDesPersonnages() {
        const sectionPersonnages = document.querySelector('.personnages')
        const axios = require('axios') 
-       const headers = new Headers()
-      
-        axios.get(`http://localhost:3000/api/personnages`)
+       const token = localStorage.getItem('token')
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+        axios.get(`http://localhost:3000/api/personnages`)     
+
+        
 
         .then(personnages => {
-        
          personnages.data.map(personnage => {
         
           const box = document.createElement('a')
@@ -49,7 +51,7 @@ import Menu from '@/components/Menu.vue'
 
         .catch(error => {
           
-          console.log(error + ""+headers)
+          console.log(error)
         })
      }
    },

@@ -10,6 +10,6 @@ router.use((req, res, next) => {
   next();
 });
 
- router.post('/login',multer,UsersControllers.connexionUtilisateur)
- router.post('/creationutilisateur',multer,UsersControllers.createUser)
+ router.post('/connexion',multer,UsersControllers.connexionUtilisateur)
+ router.post('/inscription',multer,UsersControllers.createUser)
 module.exports = router

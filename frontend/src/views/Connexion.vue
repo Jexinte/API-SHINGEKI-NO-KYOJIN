@@ -36,7 +36,7 @@ export default{
   methods : {
     login(){
       const form = document.querySelector('form')
-      const myHeaders = new Headers()
+      
   form.addEventListener('submit',(e) => {
     
     if(this.utilisateur === '' || this.motdepasse === "") {
@@ -51,18 +51,20 @@ export default{
 
     axios({
       method:'post',
-      url:'http://localhost:3000/api/auth/login',
+      url:'http://localhost:3000/api/auth/connexion',
       data : new FormData(form),
       
     })
 
        .then(res=>{
-        if(res.status === 201)
-        return window.location.href="/listePersonnages"        
+          if(res.status === 201)
+            localStorage.setItem('token',res.data['token'])
+            return window.location.href="/listePersonnages"
+    
        })
 
        .catch(error => {
-        console.log(error.response['data'].message)
+       
        })
   }
   })

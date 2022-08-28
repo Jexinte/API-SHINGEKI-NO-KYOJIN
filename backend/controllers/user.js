@@ -2,6 +2,7 @@ const {User} = require('../db/sequelize')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
+const {UniqueConstraintError} = require('sequelize')
 dotenv.config()
 
 
@@ -47,7 +48,7 @@ exports.connexionUtilisateur = (req,res) => {
           token:jwt.sign(
             {userId:user.id},
             `${process.env.TOKEN_KEY}`,
-            {expiresIn:'30s'}
+            {expiresIn:'24h'}
           )
         })
     

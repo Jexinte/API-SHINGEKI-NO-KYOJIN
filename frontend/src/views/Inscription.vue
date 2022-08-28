@@ -1,7 +1,7 @@
 <template>
 <div class="container">
 
-  <form action="/creationutilisateur" method="post" @submit.prevent="onSubmit">
+  <form action="/inscription" method="post" @submit.prevent="onSubmit">
     <a href="/connexion" id="connexion">Connexion</a>
     <label for="utilisateur">
       Utilisateur : <br>
@@ -46,7 +46,7 @@ export default{
   else
     axios({
       method:'post',
-      url:'http://localhost:3000/api/auth/creationutilisateur',
+      url:'http://localhost:3000/api/auth/inscription',
       data : new FormData(form)
     })
     .then(res => {
