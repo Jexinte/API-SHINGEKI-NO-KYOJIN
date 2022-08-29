@@ -38,3 +38,27 @@ exports.creationPersonnage = (req,res) => {
        return res.status(400).json({message:error})
    })
 }
+
+exports.ModifieUnPersonnageViaSonId = (req,res) => {
+  const {id} = req.params
+
+  //* On met au format json le contenu de la requête
+  const personnageObject = JSON.stringify(req.body)
+  const personnage = JSON.parse(personnageObject)
+
+  // On vérifie ici si le contenu de la requête contient des fichiers ou uniquement du texte
+  const testObject = req.files ? 
+  {
+    ...personnage,
+    imageCarte : `${req.protocol}://${req.get('host')}/images/${req.files['imageCarte'][0].filename}`,
+    imageHistoire : `${req.protocol}://${req.get('host')}/images/${req.files['imageHistoire'][0].filename}`,
+  } : {...req.body}
+  return Personnages.update({...testObject},{
+    where : {id:id}
+  })
+  .then(_ => {
+    Personnages.findByPk(id).then(personnage => res.status(201).json({message:`Le personnage ${personnage.nom} a bien été modifié !`}))
+  
+  
+  })
+}

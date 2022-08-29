@@ -59,7 +59,8 @@ export default{
        .then(res=>{
           if(res.status === 201)
             localStorage.setItem('token',res.data['token'])
-            return window.location.href="/listePersonnages"
+            console.log(localStorage.getItem('token'))
+             return window.location.href="/listePersonnages"
     
        })
 

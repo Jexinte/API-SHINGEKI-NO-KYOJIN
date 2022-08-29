@@ -12,7 +12,7 @@ router.use(cors())
 
  router.get('/',auth,PersonnagesControllers.AfficheLesPersonnages)
  router.get('/:id',auth,PersonnagesControllers.AfficheLesPersonnagesParId)
-
+ router.put('/:id',auth,multer,PersonnagesControllers.ModifieUnPersonnageViaSonId)
  router.post('/',auth,multer,PersonnagesControllers.creationPersonnage)
 
 module.exports = router

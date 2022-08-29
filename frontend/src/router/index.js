@@ -43,6 +43,11 @@ const routes = [
     name: `connexion utilisateur`,
     component: () => import(/* webpackChunkName: "about" */ '../views/Connexion.vue')
   },
+  {
+    path: '/modifier_un_personnage',
+    name: `Modifier un personnage`,
+    component: () => import(/* webpackChunkName: "about" */ '../views/ModifierPersonnage.vue')
+  },
 ]
 
 const router = createRouter({

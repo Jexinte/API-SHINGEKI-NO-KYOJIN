@@ -30,8 +30,8 @@ import Menu from '@/components/Menu.vue'
               const box = document.createElement('a')
                 box.className = "box"
                 box.href=`/personnage?id=${personnage.id}`
-         sectionPersonnages.append(box)
-          const img = document.createElement('img')
+                sectionPersonnages.append(box)
+            const img = document.createElement('img')
           box.appendChild(img)
           img.src = personnage.imageCarte
          const h1 = document.createElement('h1')

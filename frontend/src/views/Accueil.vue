@@ -23,6 +23,7 @@ import Menu from '@/components/Menu.vue'
        const sectionPersonnages = document.querySelector('.personnages')
        const axios = require('axios') 
        const token = localStorage.getItem('token')
+   
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
         axios.get(`http://localhost:3000/api/personnages`)     

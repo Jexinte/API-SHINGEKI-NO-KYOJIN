@@ -1,6 +1,6 @@
 <template>
 <Menu></Menu>
-<div class="container">
+<div class="container-personnages">
   <div class="left">
     <img src="" alt="">
   </div>
@@ -9,7 +9,11 @@
     <h1></h1>
     <p></p>
   </div>
+ 
+    <a id="modifier">Modifier</a>
+
 </div>
+
 </template>
 <script>
 import Menu from '@/components/Menu.vue'
@@ -36,10 +40,11 @@ export default {
         const img = document.querySelector('.left > img')
         const h1 = document.querySelector('.right > h1')
         const paragraph = document.querySelector(' .right p')
+        const boutonModifier = document.getElementById('modifier')
         img.src = personnage.data['message'].imageHistoire
         h1.textContent = personnage.data['message'].nom
         paragraph.textContent = personnage.data['message'].histoire
-     
+        modifier.href=`/modifier_un_personnage?id=${idDansLurl}`
        })
      }
    },
@@ -56,7 +61,7 @@ export default {
   box-sizing: border-box;
   font-family: 'Mouse Memoirs';
 }
-.container {
+.container-personnages {
 
   display: flex;
   justify-content: center;
@@ -151,8 +156,15 @@ p{
   white-space: pre-line;
   padding-bottom: 1em;
 }
+
+#modifier{
+  position: absolute;
+bottom: -85px;
+right: 18em;
+font-size: 2em;
+background: lightgreen;
+border-radius: 10px;
+padding: .3em 1em;
+}
 </style>
 
-<style scoped>
-
-</style>
