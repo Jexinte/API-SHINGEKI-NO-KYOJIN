@@ -51,6 +51,8 @@ export default{
     })
     .then(res => {
       if(res.status === 201)
+      document.cookie = `utilisateur=${res.data['utilisateur']};`
+      document.cookie = ` sessionId = ${res.data['idSession']}`
         window.location.href="/connexion"
     })
   })

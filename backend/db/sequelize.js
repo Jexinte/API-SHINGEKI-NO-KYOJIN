@@ -25,7 +25,7 @@ const initialisationConnexionBdd = () => {
 
   sequelize.sync({force:true})
   .then(_ => {
-      console.log('La table a bin été synchronisée !')
+      console.log('La table a bien été synchronisée !')
     PersonnagesDonnées.map(personnage => {
       Personnages.create({
         nom : personnage.nom,

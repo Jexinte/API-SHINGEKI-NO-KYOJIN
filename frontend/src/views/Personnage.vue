@@ -11,12 +11,15 @@
   </div>
  
     <a id="modifier">Modifier</a>
+    <a @click="supprimerPersonnage" id="supprimer">Supprimer</a>
 
 </div>
 
 </template>
 <script>
 import Menu from '@/components/Menu.vue'
+const axios = require('axios') 
+const token = localStorage.getItem('token')
 
 export default {
 
@@ -27,13 +30,15 @@ export default {
      afficheLaCarteDuPersonnage() {
        
        
-       const axios = require('axios') 
-       const token = localStorage.getItem('token')
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    
         const searchParams = new URLSearchParams(window.location.search)
         const idDansLurl = parseInt(searchParams.get('id'))
-        axios.get(`http://localhost:3000/api/personnages/${idDansLurl}`)
-
+        axios({
+          method:'get',
+          url:`http://localhost:3000/api/personnages/${idDansLurl}`,
+          withCredentials:true
+        })     
+      
        .then(personnage => {
 
       
@@ -46,6 +51,20 @@ export default {
         paragraph.textContent = personnage.data['message'].histoire
         modifier.href=`/modifier_un_personnage?id=${idDansLurl}`
        })
+     },
+
+     supprimerPersonnage(){
+      const searchParams = new URLSearchParams(window.location.search)
+        const idDansLurl = parseInt(searchParams.get('id'))
+      axios({
+        method:'delete',
+        url:`http://localhost:3000/api/personnages/${idDansLurl}`,
+        withCredentials:true
+      }).then(res => {
+        if(res.status === 200)
+         
+            return window.location.href="/listePersonnages"
+      })
      }
    },
    components:{Menu}
@@ -165,6 +184,19 @@ font-size: 2em;
 background: lightgreen;
 border-radius: 10px;
 padding: .3em 1em;
+color:white;
+}
+
+#supprimer {
+  position: absolute;
+font-size: 2em;
+background: red;
+border-radius: 10px;
+padding: .3em 1em;
+color:white;
+right:10em;
+bottom: -85px;
+cursor: pointer;
 }
 </style>
 

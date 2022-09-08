@@ -58,7 +58,7 @@ const axios = require('axios')
         }
       },
     mounted:function(){
-      this.créationDuPersonnage()
+      this.modifierPersonnage()
     },
     methods:{
       onFileChange: function (event) {
@@ -92,7 +92,7 @@ const axios = require('axios')
       }
       reader.readAsDataURL(file)
     },
-    créationDuPersonnage(){
+    modifierPersonnage(){
       const form = document.querySelector('form')
       const search_Params =  new URLSearchParams(window.location.search)
       const id = search_Params.get('id')
@@ -102,16 +102,22 @@ const axios = require('axios')
       form.addEventListener('submit',(e) => {
         
         e.preventDefault()
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      axios(
-      {
-        method:'put',
-        url:`http://localhost:3000/api/personnages/${id}`,
-        // method:'post',
-        //   body: new FormData(form),
+
+        axios({
+          method:'put',
+          url:`http://localhost:3000/api/personnages/${id}`,
+          withCredentials:true,
+          data : new FormData(form)
+        })  
+      // axios(
+      // {
+      //   method:'put',
+      //   url:`http://localhost:3000/api/personnages/${id}`,
+      //   // method:'post',
+      //   //   body: new FormData(form),
         
-        data : new FormData(form)
-      })
+      //   data : new FormData(form)
+      // })
 
       .then(response =>{
           if(response.status === 201){

@@ -17,16 +17,19 @@ import Menu from '@/components/Menu.vue'
       const sectionPersonnages = document.querySelector('.personnages')
        
        const axios = require('axios') 
-       const token = localStorage.getItem('token')
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+       
 
         
-        axios.get(`http://localhost:3000/api/personnages/`)   
+       axios({
+          method:'get',
+          url:`http://localhost:3000/api/personnages`,
+          withCredentials:true
+        })     
         
         .then(personnages => {
           const searchParams = new URLSearchParams(window.location.search)
          
-          for (const personnage of personnages.data) {
+          for (const personnage of personnages.data['data']) {
             if(personnage.origine === searchParams.get('mahr')){
               const box = document.createElement('a')
                 box.className = "box"

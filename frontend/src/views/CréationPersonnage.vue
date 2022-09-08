@@ -122,7 +122,7 @@ mounted:function(){
           if(response.status){
             alert('Le personnage a bien été créé , vous allez être redirigée vers la page d\'accueil')
             setTimeout(() => {
-              window.location.href = "/"
+              window.location.href = "/listePersonnages"
 
             },100)
 

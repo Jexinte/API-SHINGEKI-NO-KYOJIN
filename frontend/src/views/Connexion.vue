@@ -1,7 +1,7 @@
 <template>
 <div class="container">
 
-  <form action="/creationUtilisateur" method="post" @submit.prevent="onSubmit">
+  <form action="/creationUtilisateur" method="post" @submit.prevent>
     <router-link to="/" id="inscription">Inscription</router-link> 
     <label for="utilisateur">
       Utilisateur : <br>
@@ -36,7 +36,7 @@ export default{
   methods : {
     login(){
       const form = document.querySelector('form')
-      
+
   form.addEventListener('submit',(e) => {
     
     if(this.utilisateur === '' || this.motdepasse === "") {
@@ -53,14 +53,18 @@ export default{
       method:'post',
       url:'http://localhost:3000/api/auth/connexion',
       data : new FormData(form),
-      
+      withCredentials:true,
+
     })
 
+ 
        .then(res=>{
-          if(res.status === 201)
-            localStorage.setItem('token',res.data['token'])
-            console.log(localStorage.getItem('token'))
-             return window.location.href="/listePersonnages"
+
+        const cookie = Object.fromEntries(document.cookie.split('; ').map(v=>v.split(/=(.*)/s).map(decodeURIComponent)))
+        console.log(cookie)
+           if(res.status === 200 && cookie.utilisateur === res.data['utilisateur'] && cookie.sessionId === res.data['sessionId'])
+           return window.location.href="/listePersonnages"
+            //  return window.location.href="/listePersonnages"
     
        })
 
