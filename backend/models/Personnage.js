@@ -8,10 +8,10 @@ module.exports = (sequelize,DataTypes) => {
     },
     nom : {
       type:DataTypes.STRING,
-      // unique : {
-      //   args : true,
-      //   msg :`Ce personnage existant déjà, il ne peut être crée à nouveau`
-      // },
+       unique : {
+         args : true,
+         msg :`Ce personnage existe déjà, il ne peut être crée à nouveau !`
+       },
 
       validate : {
         notEmpty : {

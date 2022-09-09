@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Inscription from '@/views/Inscription.vue'
+
 const routes = [
   {
     path: '/',
@@ -8,7 +9,7 @@ const routes = [
   },
 
   {
-    path: '/listepersonnages',
+    path: '/listePersonnages',
     name: `La liste des personnages`,
     component: () => import(/* webpackChunkName: "about" */ '../views/Accueil.vue')
   },
@@ -48,6 +49,7 @@ const routes = [
     name: `Modifier un personnage`,
     component: () => import(/* webpackChunkName: "about" */ '../views/ModifierPersonnage.vue')
   },
+
 ]
 
 const router = createRouter({

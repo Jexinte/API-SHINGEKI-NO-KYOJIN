@@ -1,7 +1,7 @@
 <template>
 <div class="container">
 
-  <form action="/creationUtilisateur" method="post" @submit.prevent>
+  <form action="/creationUtilisateur" method="post" @submit.prevent="checkEmptyData">
     <router-link to="/" id="inscription">Inscription</router-link> 
     <label for="utilisateur">
       Utilisateur : <br>
@@ -21,7 +21,8 @@
   </div>
 </template>
 <script>
-const axios = require('axios')
+import Connexion from '@/services/Connexion'
+const connexion = new Connexion()
 export default{
   data(){
     return {
@@ -30,51 +31,17 @@ export default{
     }
   },
   mounted:function(){
-    this.login()
+    connexion.connexionUtilisateur()
   },
 
   methods : {
-    login(){
-      const form = document.querySelector('form')
-
-  form.addEventListener('submit',(e) => {
-    
-    if(this.utilisateur === '' || this.motdepasse === "") {
-
-    e.preventDefault()
-      alert(`Merci de saisir un nom utilisateur ainsi qu'un mot de passe !`)
-   }
-
-
-
-  else{
-
-    axios({
-      method:'post',
-      url:'http://localhost:3000/api/auth/connexion',
-      data : new FormData(form),
-      withCredentials:true,
-
-    })
-
- 
-       .then(res=>{
-
-        const cookie = Object.fromEntries(document.cookie.split('; ').map(v=>v.split(/=(.*)/s).map(decodeURIComponent)))
-        console.log(cookie)
-           if(res.status === 200 && cookie.utilisateur === res.data['utilisateur'] && cookie.sessionId === res.data['sessionId'])
-           return window.location.href="/listePersonnages"
-            //  return window.location.href="/listePersonnages"
-    
-       })
-
-       .catch(error => {
-       
-       })
-  }
-  })
+    checkEmptyData(){
+      if(this.utilisateur === "" || this.motdepasse === "")
+        alert(`Merci de saisir un nom utilisateur ainsi qu'un mot de passe !`)
     }
   }
+
+
 }
 </script>
 

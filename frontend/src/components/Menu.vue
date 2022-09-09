@@ -2,16 +2,30 @@
 <!-- HEADER -->
 <header id="header">
       <nav>
-        <router-link to="/listePersonnages"><img src="@/assets/img/logo_menu.jpg " id="logo" height="50" width="50"></router-link> 
+        <router-link to="/listepersonnages"><img src="@/assets/img/logo_menu.jpg " id="logo" height="50" width="50"></router-link> 
         <router-link to="/eldiens?eldiens=Eldiens" id="eldiens">Eldiens</router-link> 
         <router-link to="/mahr?mahr=Mahr" id="mahr">Mahr</router-link> 
         <router-link to="/titans?titans=Titans" id="titans">Titans</router-link> 
-        <router-link to="/créationPersonnage" id="créationpersonnage">Ajout d'un personnage</router-link> 
+        <router-link to="/créationPersonnage" id="créationpersonnage">Ajout d'un personnage</router-link>
+        <a id="Déconnexion"  @click="deconnexionDeLutilisateur">Deconnexion</a>
+     
       </nav>
   </header>
       <router-view/>
 </template>
+<script>
+  import DeconnexionUtilisateur from '@/services/Deconnexion';
+  const deconnexionDeLutilisateur = new DeconnexionUtilisateur()
 
+  export default {
+
+    methods : {
+      deconnexionDeLutilisateur(){
+        deconnexionDeLutilisateur.deconnexion()
+      }
+    }
+  }
+</script>
 <style scoped>
 
 header{
@@ -37,6 +51,9 @@ nav a {
   position: relative;
 }
 
+#Déconnexion {
+  cursor: pointer;
+}
 
 #eldiens::after{
   content: '';

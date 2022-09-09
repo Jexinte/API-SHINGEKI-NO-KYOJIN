@@ -37,7 +37,7 @@ exports.creationPersonnage = (req,res) => {
         return res.status(400).json({message:error}) 
       }
      if(error instanceof UniqueConstraintError)
-       return res.status(400).json({message:error})
+       return res.status(400).json({message:error.message})
    })
 }
 

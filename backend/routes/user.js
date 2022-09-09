@@ -18,7 +18,8 @@ const options = {
   password:``,
   database:`${process.env.NAME_DB}`,
   createDatabaseTable:false,
-  connectionLimit:1
+  connectionLimit:1,
+  // expiration:1
 }
 
 let sessionStore = new MySQLStore(options)
@@ -39,5 +40,5 @@ router.use(session({
 
  router.post('/connexion',multer,UsersControllers.connexionUtilisateur)
  router.post('/inscription',multer,UsersControllers.createUser)
- router.post('/deconnexion',UsersControllers.deconnexion)
+ router.delete('/deconnexion',UsersControllers.deconnexion)
 module.exports = router

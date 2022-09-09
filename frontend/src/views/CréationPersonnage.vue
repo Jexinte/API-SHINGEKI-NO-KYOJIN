@@ -1,6 +1,6 @@
 <template>
 <Menu></Menu>
-<form action="/api/personnages" method="post" enctype="multipart/form-data">
+<form action="/api/personnages" method="post" enctype="multipart/form-data" @submit.prevent >
   <!-- NOM -->
     <label for="nom">
       Nom du personnage :
@@ -40,7 +40,7 @@
     
 
     <!-- SUBMIT -->
-   <input type="submit" value="Envoyer" > 
+   <input type="submit" value="Envoyer" @click="test" > 
 
 </form>
 
@@ -49,7 +49,8 @@
 <script>
 
 import Menu from '@/components/Menu.vue'
- const axios = require('axios')
+import CreationDunPersonnage from '@/services/CréationPersonnage'
+const cPersonnage = new CreationDunPersonnage()
 export default {
   data(){
     return {
@@ -62,9 +63,7 @@ export default {
     }
   },
 
-mounted:function(){
-  this.créationDuPersonnage()
-},
+
 
     methods: {
     
@@ -101,39 +100,10 @@ mounted:function(){
       reader.readAsDataURL(file)
     },
 
-    créationDuPersonnage(){
-      const form = document.querySelector('form')
-      
-      form.addEventListener('submit',(e) => {
-       
-        e.preventDefault()
 
-      axios(
-      {
-        method:'post',
-        url:'http://localhost:3000/api/personnages',
-        // method:'post',
-        //   body: new FormData(form),
-        
-        data : new FormData(form)
-      })
-
-      .then(response =>{
-          if(response.status){
-            alert('Le personnage a bien été créé , vous allez être redirigée vers la page d\'accueil')
-            setTimeout(() => {
-              window.location.href = "/listePersonnages"
-
-            },100)
-
-          }
-      } )
-      
-
-      })
-
+    test(){
+      cPersonnage.créationDuPersonnage()
     }
-
 
     
   },

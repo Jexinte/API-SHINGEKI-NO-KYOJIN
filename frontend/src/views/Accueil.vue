@@ -1,5 +1,6 @@
 <template>
 <Menu></Menu>
+
 <!-- PERSONNAGES  -->
 <section class="personnages">
 
@@ -9,57 +10,14 @@
 <script>
 
 import Menu from '@/components/Menu.vue'
+import AffichagePersonnage  from '@/services/AffichePersonnages'
+const AfficheTousLesPersonnages = new AffichagePersonnage()
  export default {
  
    mounted:function() {
-     this.afficheLesCartesDesPersonnages()
+    AfficheTousLesPersonnages.afficheLesCartesDePersonnages()
    },
 
- 
-   methods : {
-    
- 
-     afficheLesCartesDesPersonnages() {
-       const sectionPersonnages = document.querySelector('.personnages')
-       const axios = require('axios') 
-
-        axios({
-          method:'get',
-          url:`http://localhost:3000/api/personnages`,
-          withCredentials:true
-        })     
-
-        
-
-        .then(personnages => {
-          personnages.data['data'].map(personnage => {
-        
-           const box = document.createElement('a')
-                 box.className = "box"
-                 box.href=`/personnage?id=${personnage.id}`
-          sectionPersonnages.append(box)
-           const img = document.createElement('img')
-           box.appendChild(img)
-          img.src = personnage.imageCarte
-          const h1 = document.createElement('h1')
-               h1.className = "h1"
-          box.appendChild(h1)
-          h1.textContent = personnage.nom
-
-         
-         })
-
-  
-
-        })
-
-        .catch(error => {
-          if(error.response['status'] === 403 || 500)
-            return window.location.href="/"
-       
-        })
-     }
-   },
    components:{  Menu }
  }
 </script>
@@ -75,7 +33,11 @@ import Menu from '@/components/Menu.vue'
   width: 100%;
   height: 85%;
 }
-
+/* #Déconnexion {
+  position: absolute;
+  left:14em;
+  cursor: pointer;
+} */
 .box:hover{
   transform: scale(1.2);
 }

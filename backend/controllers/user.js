@@ -16,12 +16,13 @@ exports.createUser = (req,res) => {
 session = req.session
 session.utilisateur = req.body.utilisateur
 
+
 User.create({
-        utilisateur : req.body.utilisateur,
-        motdepasse : hash
-    })
-    
-    .then(user => res.status(201).json({utilisateur:user.utilisateur,idSession:session.id}))
+  utilisateur : req.body.utilisateur,
+  motdepasse : hash
+})
+
+.then(user => res.status(201).json({utilisateur:user.utilisateur,idSession:session.id,data:session}))
 
     .catch(error => {
       if(error instanceof UniqueConstraintError)
@@ -50,6 +51,7 @@ session.id = req.session.id
       
       bcrypt.compare(req.body.motdepasse,user.motdepasse)
   .then(motdepasse => {
+  
 
         session.utilisateur = user.utilisateur
         //! Si le mot de passe n'est pas le bon !
@@ -58,8 +60,10 @@ session.id = req.session.id
           return res.status(403).json({message:`Le mot de passe est incorrect`})
         }
       
-        if(session.id && session.utilisateur)
-          return res.status(200).json({utilisateur:session.utilisateur,sessionId:session.id})
+        if(session.id && session.utilisateur){
+              return res.status(200).json({utilisateur:session.utilisateur,sessionId:session.id})
+        }
+        
     // //* Sinon on crée un token pour l'utilisateur 
     
     //      res.status(201).json({
@@ -79,20 +83,17 @@ session.id = req.session.id
 }
 
 exports.deconnexion = (req,res) => {
-  session = req.session 
+  session.id = req.session.id 
   Session.findOne({where:{session_id:session.id}})
   .then(sessionIdMatch => {
     if(sessionIdMatch){
       session.destroy()
-      return res.status(200).json({message:`Vous avez bien été déconnectez et allez être redirigez vers la page d'accueil`})
+       res.status(200).json({message:`Vous avez bien été déconnectez et allez être redirigez vers la page d'accueil`})
     }
 
-    else{
-      return res.status(404).json({message:`Veuillez réessayez dans quelques instants !`})
-    }
   })
 
-  .catch(error => {
-    return res.status(500).json({message:error})
-  })
-}
+  .catch(() => {
+    return res.status(404).json({message:`Veuillez réessayez dans quelques instants !`})
+    })
+  }
